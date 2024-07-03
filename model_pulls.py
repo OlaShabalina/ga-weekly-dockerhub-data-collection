@@ -69,14 +69,16 @@ for repo in repositories:
     pull_count, overview = get_repository_details(repo_name, org_name, token)
     repo_data.append([repo_name, pull_count, overview])
 
-# Get today's date
-today_date = datetime.now().strftime('%Y-%m-%d')
+print(repo_data)
 
-# Save to CSV
-csv_file = f"dockerhub-repositories-{today_date}.csv"
-with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.writer(file)
-    writer.writerow(["Repository Name", "Pull Count", "Overview"])
-    writer.writerows(repo_data)
+# # Get today's date
+# today_date = datetime.now().strftime('%Y-%m-%d')
 
-print(f"Data saved to {csv_file}")
+# # Save to CSV
+# csv_file = f"dockerhub-repositories-{today_date}.csv"
+# with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
+#     writer = csv.writer(file)
+#     writer.writerow(["Repository Name", "Pull Count", "Overview"])
+#     writer.writerows(repo_data)
+
+# print(f"Data saved to {csv_file}")
