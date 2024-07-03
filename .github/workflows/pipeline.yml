@@ -15,14 +15,6 @@ jobs:
       with:
         python-version: '3.11'
     
-    - name: Debug Environment Variables
-      run: |
-        echo "USERNAME: $USERNAME"
-        echo "PASSWORD: $PASSWORD"
-      env:
-        USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}
-    
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
