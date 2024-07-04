@@ -73,7 +73,7 @@ for repo in repositories:
 
 # Authenticate with Google Sheets API
 credentials = service_account.Credentials.from_service_account_info(
-    google_sheets_creds, scopes=["https://www.googleapis.com/auth/spreadsheets"]
+    json.loads(json.dumps(google_sheets_creds)), scopes=["https://www.googleapis.com/auth/spreadsheets"]
 )
 service = build("sheets", "v4", credentials=credentials)
 spreadsheet_id = "1NnB0GAdZa_ggG14NZ2am6zidudQMGh3FkTSjEOgOlV0"
