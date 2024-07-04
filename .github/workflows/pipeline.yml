@@ -1,6 +1,9 @@
 name: Run Model Pulls
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'update_stats'
 
 jobs:
   run-model-pulls:
