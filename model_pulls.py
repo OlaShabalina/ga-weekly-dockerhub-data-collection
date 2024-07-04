@@ -14,7 +14,6 @@ password = os.getenv('PASSWORD')
 google_sheets_creds = os.getenv('GOOGLE_SHEETS_CREDS')
 
 print(google_sheets_creds)
-print(typeof(google_sheets_creds))
 
 org_name = "ersiliaos"
 
@@ -76,7 +75,7 @@ for repo in repositories:
 
 # Authenticate with Google Sheets API
 credentials = service_account.Credentials.from_service_account_info(
-    json.loads(json.loads(google_sheets_creds)), scopes=["https://www.googleapis.com/auth/spreadsheets"]
+    json.loads(google_sheets_creds), scopes=["https://www.googleapis.com/auth/spreadsheets"]
 )
 service = build("sheets", "v4", credentials=credentials)
 spreadsheet_id = "1NnB0GAdZa_ggG14NZ2am6zidudQMGh3FkTSjEOgOlV0"
