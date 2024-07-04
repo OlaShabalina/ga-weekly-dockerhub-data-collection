@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'update_stats'
+      - '!main'
 
 jobs:
   run-model-pulls:
