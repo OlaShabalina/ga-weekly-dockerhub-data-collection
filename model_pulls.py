@@ -13,6 +13,9 @@ username = os.getenv('USERNAME')
 password = os.getenv('PASSWORD')
 google_sheets_creds = os.getenv('GOOGLE_SHEETS_CREDS')
 
+print(google_sheets_creds)
+print(typeof(google_sheets_creds))
+
 org_name = "ersiliaos"
 
 
