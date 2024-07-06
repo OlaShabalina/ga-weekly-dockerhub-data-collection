@@ -81,13 +81,13 @@ spreadsheet_id = "1myAR1qviaH-6YwYUsZy9csoHgtxIM00SuP3DphNI-Ew"
 # Read the existing sheet data, Raw tab
 sheet = service.spreadsheets()
 raw_tab_data = sheet.values().get(spreadsheetId=spreadsheet_id, range="Raw").execute()
-values = raw_tab_data.get('values', [])
+raw_values = raw_tab_data.get('values', [])
 
 # Get today's date
 today_date = datetime.now().strftime('%d/%m/%Y')
 
 # Find the header row and existing columns
-header_row = values[0]
+header_row = raw_values[0]
 latest_col_index = header_row.index("Latest")
 
 # Find the first empty column to the right for today's date
@@ -103,23 +103,21 @@ if len(header_row) <= empty_col_index:
 header_row[empty_col_index] = today_date
 
 # Update the sheet data with new pull counts
-for row in values[1:]:
+for row in raw_values[1:]:
     code = row[0]
     if code in repo_data:
-        # Update the Latest column
-        if len(row) <= latest_col_index:
-            row.extend([''] * (latest_col_index - len(row) + 1))
+        # Update the "Latest" column
         row[latest_col_index] = repo_data[code]
 
-        # Ensure the row is long enough
+        # Extend right side to add one more column and fill in the data
         if len(row) <= empty_col_index:
             row.extend([''] * (empty_col_index - len(row) + 1))
         row[empty_col_index] = repo_data[code]
 
 # Prepare the updated values for the sheet
-values[0] = header_row
+raw_values[0] = header_row
 data = {
-    "values": values
+    "values": raw_values
 }
 
 # Update the Google Sheets document
@@ -154,9 +152,7 @@ for row_idx, row in enumerate(preprocessed_values[1:], start=2):
     row[empty_col_index] = f"=Raw!{raw_col_letter}{row_idx} - Raw!{raw_prev_col_letter}{row_idx}"
 
     # Update the Latest column
-    if len(row) <= latest_col_index:
-        row.extend([''] * (latest_col_index - len(row) + 1))
-    row[latest_col_index] = str(row[empty_col_index])
+    row[latest_col_index] = row[empty_col_index]
 
 preprocessed_data = {"values": preprocessed_values}
 
