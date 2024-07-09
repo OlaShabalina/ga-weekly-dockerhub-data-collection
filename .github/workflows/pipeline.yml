@@ -1,10 +1,8 @@
 name: Run Model Pulls
 
-on:
-  push:
-    branches:
-      - 'update_stats'
-      - '!main'
+on: 
+  workflow_dispatch:
+    # cron schedule for future runs
 
 jobs:
   run-model-pulls:
